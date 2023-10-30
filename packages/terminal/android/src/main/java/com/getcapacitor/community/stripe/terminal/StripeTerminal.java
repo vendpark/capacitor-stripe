@@ -308,7 +308,6 @@ public class StripeTerminal extends Executor {
             return;
         }
         this.collectPaymentMethodCall = call;
-        // Terminal.getInstance().retrievePaymentIntent(call.getString("paymentIntent"), createPaymentIntentCallback);
         Terminal.getInstance().collectSetupIntentPaymentMethod(call.getString("setupIntent"), true, collectSetupIntentPaymentMethodCallback);
 
     }
@@ -329,7 +328,7 @@ public class StripeTerminal extends Executor {
     private final SetupIntentCallback confirmSetupIntentCallback = new SetupIntentCallback() {
         @Override
         public void onSuccess(@NonNull SetupIntent setupIntent) {
-            this.collectPaymentMethodCall.resolve();
+            collectPaymentMethodCall.resolve();
             notifyListeners(TerminalEnumEvent.Completed.getWebEventName(), emptyObject);
         }
 
