@@ -87,6 +87,7 @@ async () => {
 * [`disconnectReader()`](#disconnectreader)
 * [`cancelDiscoverReaders()`](#canceldiscoverreaders)
 * [`collect(...)`](#collect)
+* [`collectPaymentMethod(...)`](#collectpaymentmethod)
 * [`cancelCollect()`](#cancelcollect)
 * [`addListener(TerminalEventsEnum.Loaded, ...)`](#addlistenerterminaleventsenumloaded)
 * [`addListener(TerminalEventsEnum.DiscoveredReaders, ...)`](#addlistenerterminaleventsenumdiscoveredreaders)
@@ -182,6 +183,19 @@ collect(options: { paymentIntent: string; }) => Promise<void>
 | Param         | Type                                    |
 | ------------- | --------------------------------------- |
 | **`options`** | <code>{ paymentIntent: string; }</code> |
+
+--------------------
+
+
+### collectPaymentMethod(...)
+
+```typescript
+collectPaymentMethod(options: { clientSecret: string; }) => Promise<void>
+```
+
+| Param         | Type                                   |
+| ------------- | -------------------------------------- |
+| **`options`** | <code>{ clientSecret: string; }</code> |
 
 --------------------
 
