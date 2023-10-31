@@ -192,6 +192,10 @@ public class StripeTerminal: NSObject, DiscoveryDelegate, LocalMobileReaderDeleg
         }
     }
 
+    public func collectPaymentMethod(_ call: CAPPluginCall) {
+        // Implement iOS functionality
+    }
+
     public func cancelCollect(_ call: CAPPluginCall) {
         if let cancelable = self.collectCancelable {
             cancelable.cancel { error in
