@@ -60,6 +60,11 @@ export class StripeTerminalWeb
     this.notifyListeners(TerminalEventsEnum.Completed, null);
   }
 
+  async collectPaymentMethod(options: { clientSecret: string }): Promise<void> {
+    console.log('collectPaymentMethod', options);
+    this.notifyListeners(TerminalEventsEnum.Completed, null);
+  }
+
   async cancelCollect(): Promise<void> {
     console.log('cancelCollect');
     this.notifyListeners(TerminalEventsEnum.Canceled, null);
