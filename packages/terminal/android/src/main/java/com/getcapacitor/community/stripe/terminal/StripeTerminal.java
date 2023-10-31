@@ -303,13 +303,12 @@ public class StripeTerminal extends Executor {
     }
 
     public void collectPaymentMethod(final PluginCall call) {
-        if (call.getString("setupIntent") == null) {
+        if (call.getString("clientSecret") == null) {
             call.reject("The value of setupIntent is not set correctly.");
             return;
         }
         this.collectPaymentMethodCall = call;
-        Terminal.getInstance().collectSetupIntentPaymentMethod(call.getString("setupIntent"), true, collectSetupIntentPaymentMethodCallback);
-
+        Terminal.getInstance().retrieveSetupIntent(call.getString("clientSecret"), retrieveSetupIntentCallback);
     }
 
     private final SetupIntentCallback collectSetupIntentPaymentMethodCallback = new SetupIntentCallback() {
@@ -330,6 +329,19 @@ public class StripeTerminal extends Executor {
         public void onSuccess(@NonNull SetupIntent setupIntent) {
             collectPaymentMethodCall.resolve();
             notifyListeners(TerminalEnumEvent.Completed.getWebEventName(), emptyObject);
+        }
+
+        @Override
+        public void onFailure(@NonNull TerminalException ex) {
+            notifyListeners(TerminalEnumEvent.Failed.getWebEventName(), emptyObject);
+            collectPaymentMethodCall.reject(ex.getLocalizedMessage(), ex);
+        }
+    };
+
+    private final SetupIntentCallback retrieveSetupIntentCallback = new SetupIntentCallback() {
+        @Override
+        public void onSuccess(@NonNull SetupIntent setupIntent) {
+            Terminal.getInstance().collectSetupIntentPaymentMethod(setupIntent, true, collectSetupIntentPaymentMethodCallback);
         }
 
         @Override
