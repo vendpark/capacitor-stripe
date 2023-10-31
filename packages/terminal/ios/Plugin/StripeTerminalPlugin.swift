@@ -49,6 +49,10 @@ public class StripeTerminalPlugin: CAPPlugin {
         self.implementation.collect(call)
     }
 
+        @objc func collectPaymentMethod(_ call: CAPPluginCall) {
+        self.implementation.collectPaymentMethod(call)
+    }
+
     @objc func cancelCollect(_ call: CAPPluginCall) {
         self.implementation.cancelCollect(call)
     }
