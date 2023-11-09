@@ -1,6 +1,6 @@
 {
   "name": "@vendpark/capacitor-stripe",
-  "version": "7.0.13",
+  "version": "7.0.14",
   "engines": {
     "node": ">=16.0.0"
   },
