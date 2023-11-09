@@ -55,10 +55,15 @@ public class StripeTerminalPlugin extends Plugin {
     }
 
     private void _initialize(PluginCall call) throws TerminalException {
-        if (getPermissionState("location") != PermissionState.GRANTED) {
-            requestPermissionForAlias("location", call, "locationPermsCallback");
-        } else if (getPermissionState("bluetooth") != PermissionState.GRANTED) {
-            requestPermissionForAlias("bluetooth", call, "bluetoothPermsCallback");
+        // if (getPermissionState("location") != PermissionState.GRANTED) {
+        //     requestPermissionForAlias("location", call, "locationPermsCallback");
+        // } else if (getPermissionState("bluetooth") != PermissionState.GRANTED) {
+        //     requestPermissionForAlias("bluetooth", call, "bluetoothPermsCallback");
+        // } else {
+        //     this.implementation.initialize(call);
+        // }
+        if (getPermissionState("location") != PermissionState.GRANTED || getPermissionState("bluetooth") != PermissionState.GRANTED) {
+            pluginRequestAllPermissions();
         } else {
             this.implementation.initialize(call);
         }
