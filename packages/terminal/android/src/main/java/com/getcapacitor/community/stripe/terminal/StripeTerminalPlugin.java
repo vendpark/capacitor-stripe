@@ -18,8 +18,7 @@ import com.stripe.stripeterminal.external.models.TerminalException;
 @CapacitorPlugin(
     name = "StripeTerminal",
     permissions = {
-        @Permission(alias = "location", strings = { Manifest.permission.ACCESS_FINE_LOCATION }),
-        @Permission(alias = "bluetooth", strings = { Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT })
+        @Permission(alias = "location", strings = { Manifest.permission.ACCESS_FINE_LOCATION })
     }
 )
 public class StripeTerminalPlugin extends Plugin {
@@ -56,7 +55,7 @@ public class StripeTerminalPlugin extends Plugin {
 
     @PermissionCallback
     private void allPermsCallback(PluginCall call) throws TerminalException {
-        if (getPermissionState("bluetooth") == PermissionState.GRANTED && getPermissionState("location") == PermissionState.GRANTED ) {
+        if (getPermissionState("location") == PermissionState.GRANTED ) {
             this._initialize(call);
         } else {
             call.reject("Permissions are missing, unable to initialize stripe terminal");
@@ -71,7 +70,7 @@ public class StripeTerminalPlugin extends Plugin {
         // } else {
         //     this.implementation.initialize(call);
         // }
-        if (getPermissionState("location") != PermissionState.GRANTED || getPermissionState("bluetooth") != PermissionState.GRANTED) {
+        if (getPermissionState("location") != PermissionState.GRANTED) {
             requestAllPermissions(call, "allPermsCallback");
         } else {
             this.implementation.initialize(call);

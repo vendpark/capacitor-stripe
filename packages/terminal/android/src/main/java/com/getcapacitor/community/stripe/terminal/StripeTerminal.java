@@ -77,16 +77,6 @@ public class StripeTerminal extends Executor {
     public void initialize(final PluginCall call) throws TerminalException {
         this.isTest = call.getBoolean("isTest", true);
 
-        BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
-        if (!bluetooth.isEnabled()) {
-            if (
-                    ActivityCompat.checkSelfPermission(this.contextSupplier.get(), Manifest.permission.BLUETOOTH_CONNECT) ==
-                            PackageManager.PERMISSION_GRANTED
-            ) {
-                bluetooth.enable();
-            }
-        }
-
         this.activitySupplier.get()
                 .runOnUiThread(
                         () -> {
