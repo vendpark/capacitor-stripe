@@ -18,9 +18,10 @@ import com.stripe.stripeterminal.external.models.TerminalException;
 @CapacitorPlugin(
     name = "StripeTerminal",
     permissions = {
-        @Permission(alias = "location", strings = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION })
+        @Permission(alias = "location", strings = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION })
     }
 )
+
 public class StripeTerminalPlugin extends Plugin {
 
     private final StripeTerminal implementation = new StripeTerminal(
