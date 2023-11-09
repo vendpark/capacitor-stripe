@@ -115,6 +115,7 @@ public class StripeTerminal extends Executor {
             call.reject("android.permission.ACCESS_FINE_LOCATION permission is not granted.");
             return;
         }
+        Log.d(this.logTag, "Discovering readers on Android.");
 
         this.locationId = call.getString("locationId");
         final DiscoveryConfiguration config;
@@ -125,6 +126,7 @@ public class StripeTerminal extends Executor {
             config = new DiscoveryConfiguration.InternetDiscoveryConfiguration(this.locationId, this.isTest);
             this.terminalConnectType = TerminalConnectTypes.Internet;
         } else if (Objects.equals(call.getString("type"), TerminalConnectTypes.Usb.getWebEventName())) {
+            Log.d(this.logTag, "Setting discovery config to be USB!.");
             config = new DiscoveryConfiguration.UsbDiscoveryConfiguration(0, this.isTest);
             this.terminalConnectType = TerminalConnectTypes.Usb;
         } else if (Objects.equals(call.getString("type"), TerminalConnectTypes.Bluetooth.getWebEventName()) || Objects.equals(call.getString("type"), TerminalConnectTypes.Simulated.getWebEventName())) {
@@ -135,6 +137,7 @@ public class StripeTerminal extends Executor {
             return;
         }
 
+        Log.d(this.logTag, "Scanning for readers!.");
         final DiscoveryListener discoveryListener = readers -> {
             // 検索したReaderの一覧をListenerで渡す
             Log.d(logTag, String.valueOf(readers.get(0).getSerialNumber()));
@@ -160,6 +163,7 @@ public class StripeTerminal extends Executor {
                                     }
                                     @Override
                                     public void onFailure(@NonNull TerminalException ex) {
+                                        Log.d(this.logTag, "Failed to get readers darn it!.");
                                         Log.d(logTag, ex.getLocalizedMessage());
                                     }
                                 }

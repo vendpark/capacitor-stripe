@@ -1,6 +1,6 @@
 {
   "name": "@vendpark/stripe-identity",
-  "version": "7.0.11",
+  "version": "7.0.12",
   "engines": {
     "node": ">=16.0.0"
   },
