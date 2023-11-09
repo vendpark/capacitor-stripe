@@ -163,7 +163,7 @@ public class StripeTerminal extends Executor {
                                     }
                                     @Override
                                     public void onFailure(@NonNull TerminalException ex) {
-                                        Log.d(this.logTag, "Failed to get readers darn it!.");
+                                        Log.d(logTag, "Failed to get readers darn it!.");
                                         Log.d(logTag, ex.getLocalizedMessage());
                                     }
                                 }
