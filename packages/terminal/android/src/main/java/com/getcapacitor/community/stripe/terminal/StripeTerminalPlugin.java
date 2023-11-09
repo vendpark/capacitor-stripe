@@ -54,6 +54,15 @@ public class StripeTerminalPlugin extends Plugin {
         }
     }
 
+    @PermissionCallback
+    private void allPermsCallback(PluginCall call) throws TerminalException {
+        if (getPermissionState("bluetooth") == PermissionState.GRANTED && getPermissionState("location") == PermissionState.GRANTED ) {
+            this._initialize(call);
+        } else {
+            call.reject("Permissions are missing, unable to initialize stripe terminal");
+        }
+    }
+
     private void _initialize(PluginCall call) throws TerminalException {
         // if (getPermissionState("location") != PermissionState.GRANTED) {
         //     requestPermissionForAlias("location", call, "locationPermsCallback");
@@ -63,7 +72,7 @@ public class StripeTerminalPlugin extends Plugin {
         //     this.implementation.initialize(call);
         // }
         if (getPermissionState("location") != PermissionState.GRANTED || getPermissionState("bluetooth") != PermissionState.GRANTED) {
-            pluginRequestAllPermissions();
+            requestAllPermissions(call, "allPermsCallback");
         } else {
             this.implementation.initialize(call);
         }
