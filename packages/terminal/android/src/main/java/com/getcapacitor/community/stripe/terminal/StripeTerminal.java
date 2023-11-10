@@ -116,7 +116,6 @@ public class StripeTerminal extends Executor {
             return;
         }
         Log.d(this.logTag, "Discovering readers on Android.");
-w
         this.locationId = call.getString("locationId");
         final DiscoveryConfiguration config;
         if (Objects.equals(call.getString("type"), TerminalConnectTypes.TapToPay.getWebEventName())) {
