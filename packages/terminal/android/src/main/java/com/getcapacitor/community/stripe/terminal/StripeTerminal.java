@@ -110,9 +110,9 @@ public class StripeTerminal extends Executor {
     }
 
     public void onDiscoverReaders(final PluginCall call)  {
-        if (ActivityCompat.checkSelfPermission(this.contextSupplier.get(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(this.logTag, "android.permission.ACCESS_COARSE_LOCATION permission is not granted.");
-            call.reject("android.permission.ACCESS_COARSE_LOCATION permission is not granted.");
+        if (ActivityCompat.checkSelfPermission(this.contextSupplier.get(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(this.logTag, "android.permission.ACCESS_FINE_LOCATION permission is not granted.");
+            call.reject("android.permission.ACCESS_FINE_LOCATION permission is not granted.");
             return;
         }
         Log.d(this.logTag, "Discovering readers on Android.");
